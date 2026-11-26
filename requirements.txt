@@ -1,0 +1,4 @@
+# PyTorch is NOT listed here on purpose: install.py picks the right build for your
+# hardware (NVIDIA CUDA, AMD ROCm, Apple Metal, Intel XPU or CPU-only).
+numpy
+certifi

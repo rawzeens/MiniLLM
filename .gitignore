@@ -1,0 +1,12 @@
+# Big or machine-specific: created by the installer and the levels, never uploaded
+.venv/
+data/
+out/
+hardware.json
+*.part
+*.tmp
+
+__pycache__/
+*.pyc
+.DS_Store
+.ipynb_checkpoints/
