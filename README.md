@@ -14,10 +14,10 @@ the model is by text it has never seen), so you can watch the numbers drop as th
 | 1 | First neural network | learning by gradient descent instead of counting | 10 s |
 | 2 | Looks 8 letters back | embeddings + a hidden layer (Bengio 2003) | 10 s |
 | 3 | Tiny GPT (letters) | attention, a real transformer - writes Shakespeare-ish text | ~13 min |
-| 4 | Story GPT (words) | your own BPE tokenizer + real data: it writes children's stories | ~30 min |
-| 5 | Chat model | fine-tuning: it answers requests like "tell me a story about a fox" | ~8 min |
+| 4 | Story GPT (words) | your own BPE tokenizer + real data: it writes children's stories | 31 min |
+| 5 | Chat model | fine-tuning: it answers requests like "tell me a story about a fox" | 8 min |
 
-\* measured on a MacBook Air M4 (tier "small"). The script shows the time left while it trains.
+\* on a MacBook Air M4 (tier "small"); level 3 is estimated from its measured speed. The script shows the time left while it trains.
 
 ## Start
 
@@ -123,6 +123,24 @@ These are small models trained in minutes on one computer, not ChatGPT:
 
 Going further: more data and steps (`--data-mb`, `--iters`), a bigger tier on a bigger GPU, or your own text -
 put a `.txt` file in place of the Shakespeare download and run level 3 on it.
+
+## Real results (MacBook Air M4, tier "small", default settings)
+
+| Level | Loss on unseen text | Writes |
+|---|---|---|
+| 0 counting | 2.48 | `Thou ll ar. CICAne l hoepoe stus r: yo t inghoren` |
+| 1 neural bigram | 2.49 (same knowledge, learned) | `Why ve my sofell our t be, by, aline` |
+| 2 MLP | 1.83 | `She with be well thing these thy seed, / That when thy allle to sue` |
+| 4 story GPT (5.8M params) | 1.93 (from 8.39) | see below |
+
+Level 4, unprompted:
+> Once upon a time, there was a lively dog named Leo. Leo loved to run and play all day. He had a lot of friends who liked to run and play with his friends.
+> One day, Leo saw a big, shiny ball. He wanted to play with it, so he went to his friends and asked them to play with him. [...] They ran and jumped in the grass. They laughed and had a lot of fun. Leo was not lonely anymore.
+
+Level 5, asked *"Write a short story. Use the words cake, rain and friend. Include a lesson to learn."*:
+> Once upon a time, there was a little girl named Lily. She loved to bake cookies with her mommy and daddy. One day, Lily's mommy asked her to make a cake. Lily was very excited and agreed to help her mommy [...]
+
+Small models repeat names and slip on logic ("Spot had a pet dog named Spot") - bigger tiers, more data and longer training fix that.
 
 ## Troubleshooting
 
