@@ -13,7 +13,7 @@ the model is by text it has never seen), so you can watch the numbers drop as th
 | 0 | Counting model | a language model is just "guess the next letter" | 1 s |
 | 1 | First neural network | learning by gradient descent instead of counting | 10 s |
 | 2 | Looks 8 letters back | embeddings + a hidden layer (Bengio 2003) | 10 s |
-| 3 | Tiny GPT (letters) | attention, a real transformer - writes Shakespeare-ish text | ~12 min |
+| 3 | Tiny GPT (letters) | attention, a real transformer - writes Shakespeare-ish text | ~13 min |
 | 4 | Story GPT (words) | your own BPE tokenizer + real data: it writes children's stories | ~30 min |
 | 5 | Chat model | fine-tuning: it answers requests like "tell me a story about a fox" | ~8 min |
 
@@ -78,7 +78,7 @@ and are never uploaded (see `.gitignore`):
 | Folder | What | Size |
 |---|---|---|
 | `.venv/` | PyTorch | ~0.8 GB (Mac / CPU-only), ~4.5 GB (NVIDIA) |
-| `data/` | downloads + token files | small: ~40 MB, large: ~600 MB |
+| `data/` | downloads + token files | small: ~50 MB, large: ~600 MB |
 | `out/` | trained models | small: ~170 MB, large: ~2.5 GB |
 
 Space savers built in:
@@ -131,3 +131,8 @@ put a `.txt` file in place of the Shakespeare download and run level 3 on it.
 - **Out of memory** - training halves the batch automatically; or use a smaller tier: `--tier tiny`.
 - **Download fails with a certificate error (macOS)** - run "Install Certificates.command" in your Python folder, or just retry: it falls back to `curl`.
 - **Slow on a Mac** - Apple GPUs are slower than NVIDIA ones for training; the "small" tier is tuned to stay under ~30 minutes per level.
+
+## Checks
+
+`python3 -m unittest discover tests` - tokenizer, hardware decisions (simulated NVIDIA/AMD/Apple/Intel machines)
+and chat-data building. No PyTorch or internet needed.
